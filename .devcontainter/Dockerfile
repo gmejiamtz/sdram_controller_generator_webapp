@@ -11,4 +11,3 @@ RUN curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E4
 RUN sudo chmod 644 /etc/apt/trusted.gpg.d/scalasbt-release.gpg
 RUN sudo apt-get update && export DEBIAN_FRONTEND=noninteractive
 RUN sudo apt-get install sbt verilator iverilog yosys openjdk-17-jdk
-RUN git clone https://github.com/gmejiamtz/sdram_controller_generator.git
