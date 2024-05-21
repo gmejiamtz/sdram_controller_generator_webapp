@@ -1,0 +1,42 @@
+{
+    "name": "MERN-Scala-Chisel Development Container",
+    "build" : {
+        "dockerfile": "Dockerfile"
+    },
+    "features": {
+        "ghcr.io/devcontainers-contrib/features/express-generator:2": {},
+        "ghcr.io/devcontainers-contrib/features/mongodb-atlas-cli-homebrew:1": {},
+        "ghcr.io/devcontainers-contrib/features/node-asdf:0": {}
+    },
+    "customizations": {   
+        "vscode": {
+          "extensions": [
+            "esbenp.prettier-vscode",
+            "dbaeumer.vscode-eslint",
+            "itryapitsin.Sbt",
+            "scala-lang.scala",
+            "scalameta.metals",
+            "jasonnutter.search-node-modules",
+            "chris-noring.node-snippets",
+            "msjsdiag.vscode-react-native",
+            "dsznajder.es7-react-js-snippets",
+            "mongodb.mongodb-vscode",
+            "JoeyYiZhao.mongo-runner",
+            "DavidAnson.vscode-markdownlint",
+            "ms-azuretools.vscode-docker"
+        ]}
+        },
+    "portsAttributes": {
+      "3000": {
+        "label": "React Dev Server",
+        "onAutoForward": "notify"
+      },
+      "5000": {
+        "label": "Express Server",
+        "onAutoForward": "notify"
+      }
+    },
+    "forwardPorts": [3000, 5000],
+    "remoteUser": "vscode"
+  }
+  
