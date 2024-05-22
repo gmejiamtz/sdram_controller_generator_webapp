@@ -23,6 +23,12 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+const generator_router = require('./routes/generate_verilog');
+const datasheet_router = require('./routes/datasheet');
+
+app.use('/generate_verilog',generator_router);
+app.use('/datasheet', datasheet_router);
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
