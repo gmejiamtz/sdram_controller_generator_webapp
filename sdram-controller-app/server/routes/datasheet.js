@@ -21,7 +21,7 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(404).json("Error in finding datasheets: " + err));
 });
 
-router.route('/add_datasheet').post(upload.single('datasheet'), (req, res) => {
+router.route('/upload_datasheet').post(upload.single('datasheet'), (req, res) => {
     if (!req.file) {
         return res.status(400).json('No file uploaded');
     }
@@ -50,5 +50,33 @@ router.route('/add_datasheet').post(upload.single('datasheet'), (req, res) => {
         .catch(err => res.status(400).json('Error adding new datasheet: ' + err));
     });
 });
+
+router.route('/add_datasheet_raw').post((req, res) => {
+    const jsonString = req.body.datasheet;
+    //console.log("Trying to add datatsheet: " + JSON.stringify(jsonString));
+    if (!jsonString) {
+        return res.status(400).json('No datasheet provided');
+    }
+
+    let json;
+    try {
+        json = JSON.parse(JSON.stringify(jsonString));
+    } catch (e) {
+        return res.status(400).json('Provided string is not valid JSON');
+    }
+
+    // Ensure the JSON structure matches your expected format
+    if (!json.company || !json.name || !json.config) {
+        return res.status(400).json('JSON format is incorrect');
+    }
+
+    const new_sheet = new datasheet({ datasheet: JSON.stringify(json) });
+
+    new_sheet.save()
+    .then(() => res.json("New datasheet added!"))
+    .catch(err => res.status(400).json('Error adding new datasheet: ' + err));
+});
+
+
 
 module.exports = router;
