@@ -53,7 +53,6 @@ router.route('/upload_datasheet').post(upload.single('datasheet'), (req, res) =>
 
 router.route('/add_datasheet_raw').post((req, res) => {
     const jsonString = req.body.datasheet;
-    //console.log("Trying to add datatsheet: " + JSON.stringify(jsonString));
     if (!jsonString) {
         return res.status(400).json('No datasheet provided');
     }
@@ -73,7 +72,7 @@ router.route('/add_datasheet_raw').post((req, res) => {
     const new_sheet = new datasheet({ datasheet: JSON.stringify(json) });
 
     new_sheet.save()
-    .then(() => res.json("New datasheet added!"))
+    .then(() => res.json("New datasheet added! From " + json.company + " Name: " + json.name))
     .catch(err => res.status(400).json('Error adding new datasheet: ' + err));
 });
 
